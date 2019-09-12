@@ -4,8 +4,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 import numpy as np
+import pandas as pd
 
-#Initialise dash
+#Initialise dash application
 app= dash.Dash()
 
 #get data for app
@@ -18,25 +19,22 @@ colors = {'background':'#a7cef2', 'text':'#7FDBFF'}
 
 #Use dash html components to diplay html on dash
 app.layout = html.Div(children=[
-            html.H1("Hello Kedumetse!", style={'textAlign':'center'
+             html.H1("Hello Kedumetse!", style={'textAlign':'center'
                                                 }),
-            html.Div("Welcome to your personal workspace"),
-# Display graph showing assignment completion
-            dcc.Graph(id="completion",
-                        figure={'data':[{'x':[1,2,3],'y':[4,5,6],'type':'bar','name':'scores'},
-                                        {'x':[2,4,5],'y':[6,7,8],'type':'bar','name':'total'},
-                        ],
-                                'layout':{
-#Add colors to the graphs using html core componets
-                                    'plot_bgcolor':colors['background'],
-                                    'paper_bgcolor': colors['background'],
-                                    'font':{'color':colors['text']},
-                                    'title':'My Marks!'
-                                } })
+             html.Div("Vula Dashboard"),
+# Display plot using dcc graph_objs
+             dcc.Graph(id="plotfromdata",
+                        figure={'data':[go.Scatter(x=random_x, y=random_y,mode='markers',
+                        marker={'size':12,'color':colors['background']})],
+                        'layout':go.Layout(title='My Personal Workspace', xaxis={'title':'xaxis title'})}
 
+),
+dcc.Graph(id="plotfromdata2",
+           figure={'data':[go.Scatter(x=random_x, y=random_y,mode='markers',
+           marker={'size':12,'color':colors['background']})],
+           'layout':go.Layout(title='My Personal Workspace', xaxis={'title':'xaxis title'})}
 
-
-])
+)])
 
 if __name__ == '__main__':
     app.run_server()
