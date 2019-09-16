@@ -1,6 +1,6 @@
 """
-A simple app prototype learning analytics dashboard for programming assignment feedback.
-Requires dash-bootstrap-components 0.3.0 or later
+A simple learning analytics dashboard for programming assignment feedback.
+
 """
 
 #Import python libraries
@@ -27,9 +27,8 @@ colors = {'background':'#a7cef2', 'text':'#7FDBFF'}
 
 #Use dash html components to diplay html on dash
 app.layout = html.Div(children=[
-             html.H1("Hello Kedumetse!", style={'textAlign':'center'
+             html.H1("Hello Kedumetse!", style={'textAlign':'left'
                                                 }),
-             html.Div("Welcome to the New Vula Dashboard"),
 
  # Div that creates a Navigation tab in dasbboard
             html.Div(
@@ -46,7 +45,7 @@ app.layout = html.Div(children=[
                                 dbc.CardBody(
                                     [
                                         html.P(
-                                            "This tab has a card!",
+                                            "View Your Common Error",
                                             className="card-text",
                                         ),
                                         dbc.Button("Click here", color="success"),
@@ -64,18 +63,32 @@ app.layout = html.Div(children=[
                 ),
             ]
         ),
+    #create a dropdown that menu item
+            dcc.Dropdown(
+        options=[
+            {'label': 'Assignment 1', 'value': 'Ass1'},
+            {'label': 'Select Assignment', 'value': 'Select'},
+            {'label': 'Assignment 2', 'value': 'Ass2'},
+            {'label': 'Assignment 3', 'value': 'Ass3'}
+        ],
+        multi=True,
+        value="Select"
+    ),
+        dcc.Dropdown(
+        options=[
+            {'label': 'Highest Score', 'value': 'HS'},
+            {'label': 'View Progress', 'value': 'VP'},
+            {'label': 'DP Needed', 'value': 'DP'}
+        ],
+        multi=True,
+        value="VP"
+    ),
 
 # Display plot using dcc graph_objs
              dcc.Graph(id="plotfromdata",
                         figure={'data':[go.Scatter(x=random_x, y=random_y,mode='markers',
                         marker={'size':12,'color':colors['background']})],
                         'layout':go.Layout(title='My Personal Workspace', xaxis={'title':'xaxis title'})}
-
-),
-dcc.Graph(id="plotfromdata2",
-           figure={'data':[go.Scatter(x=random_x, y=random_y,mode='markers',
-           marker={'size':12,'color':colors['background']})],
-           'layout':go.Layout(title='My Personal Workspace', xaxis={'title':'xaxis title'})}
 
 )], style={'margin':'50px'})
 
