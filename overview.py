@@ -16,16 +16,6 @@ import pandas as pd
 #Initialise dash application
 app= dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-#get data for app
-np.random.seed(42)
-random_x=np.random.randint(1,101,100)
-random_y=np.random.randint(1,101,100)
-
-#Add styling to app. Option to use external stylsheet
-colors = {'background':'#a7cef2', 'text':'#7FDBFF'}
-
-
-#Use dash html components to diplay html on dash
 app.layout = html.Div(children=[
              html.H1("Hello Kedumetse!", style={'textAlign':'left'
                                                 }),
@@ -65,34 +55,16 @@ app.layout = html.Div(children=[
                 ),
             ]
         ),
-    #create a dropdown that menu item
-            dcc.Dropdown(
-        options=[
-            {'label': 'Assignment 1', 'value': 'Ass1'},
-            {'label': 'Select Assignment', 'value': 'Select'},
-            {'label': 'Assignment 2', 'value': 'Ass2'},
-            {'label': 'Assignment 3', 'value': 'Ass3'}
-        ],
-        multi=True,
-        value="Select"
-    ),
-        dcc.Dropdown(
-        options=[
-            {'label': 'Highest Score', 'value': 'HS'},
-            {'label': 'View Progress', 'value': 'VP'},
-            {'label': 'DP Needed', 'value': 'DP'}
-        ],
-        multi=True,
-        value="VP"
-    ),
-
-# Display plot using dcc graph_objs
-             dcc.Graph(id="plotfromdata",
-                        figure={'data':[go.Scatter(x=random_x, y=random_y,mode='markers',
-                        marker={'size':12,'color':colors['background']})],
-                        'layout':go.Layout(title='My Personal Workspace', xaxis={'title':'xaxis title'})}
-
-)], style={'margin':'50px'})
+#Div that shows results of submitted programming assignments
+        html.Div([
+            dbc.Row([
+                dbc.Col(
+                "Output From Submissions",
+                style={"height": "100px", "border-style": "solid"},
+                ),
+            ]),
+        ]),
+        ], style={'margin':'50px'})
 
 if __name__ == '__main__':
     app.run_server()
