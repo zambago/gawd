@@ -90,7 +90,7 @@ app.layout = html.Div(children=[
              dcc.Graph(id="plotfromdata",
                         figure={'data':[go.Scatter(x=random_x, y=random_y,mode='markers',
                         marker={'size':12,'color':colors['background']})],
-                        'layout':go.Layout(title='My Personal Workspace', xaxis={'title':'xaxis title'})}
+                        'layout':go.Layout(title='Scores for Submissions', xaxis={'title':'Number of Submissions'},yaxis={'title':'Score'})}
 
 )], style={'margin':'50px'})
 

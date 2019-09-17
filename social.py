@@ -54,8 +54,23 @@ app.layout = html.Div(children=[
                     ]
                 ),
             ]
-        )
-        ], style={'margin':'50px'})
+        ),
+#Div that shows results of submitted programming assignments
+                html.Div([
+                    dbc.Row([
+                        dbc.Col(
+                        "Top Friend Display",
+                        style={"height": "100px", "border-style": "solid"},
+                        ),
+                    ]),
+                dbc.Row([
+                    dbc.Col(
+                    "Summary of Assignment Submissions",
+                    style={"height": "100px", "border-style": "solid"},
+                    ),
+                ]),
+                ]),
+                ], style={'margin':'50px'})
 
 if __name__ == '__main__':
     app.run_server()
