@@ -63,6 +63,7 @@ app.layout = html.Div(children=[
                 style={"height": "100px", "border-style": "solid"},
                 ),
             ]),
+            html.Div(id='my-submissions', style={'border':'2px red solid'})
         ]),
         ], style={'margin':'50px'})
 

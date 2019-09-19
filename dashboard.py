@@ -66,7 +66,7 @@ app.layout = html.Div(children=[
             ]
         ),
     #create a dropdown that menu item
-            dcc.Dropdown(
+            dcc.Dropdown(id='assignment-picker',
         options=[
             {'label': 'Assignment 1', 'value': 'Ass1'},
             {'label': 'Select Assignment', 'value': 'Select'},
@@ -76,7 +76,7 @@ app.layout = html.Div(children=[
         multi=True,
         value="Select"
     ),
-        dcc.Dropdown(
+        dcc.Dropdown(id='progress-picker',
         options=[
             {'label': 'Highest Score', 'value': 'HS'},
             {'label': 'View Progress', 'value': 'VP'},
