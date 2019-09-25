@@ -27,12 +27,14 @@ yvalues = np.random.randint(1,101,10)
 
 #data for number of submissions per assignments
 
-y_value = np.random.randint(1,41,10)
+trace1_value = np.random.randint(1,31,10)
+trace2_value = np.random.randint(1,20,10)
+trace3_value = np.random.randint(1,21,10)
 
 #Define Traces for second Graph
-trace1 = go.Bar(x=xvalues, y=y_value,name='Assignment1', marker={'color':'#eb34db'})
-trace2 = go.Bar(x=xvalues, y=y_value,name='Assignment2', marker={'color':'#34eb3d'})
-trace3 = go.Bar(x=xvalues, y=y_value,name='Assignment2', marker={'color':'#eb8634'})
+trace1 = go.Bar(x=xvalues, y=trace1_value,name='Assignment1', marker={'color':'#eb34db'})
+trace2 = go.Bar(x=xvalues, y=trace2_value,name='Assignment2', marker={'color':'#34eb3d'})
+trace3 = go.Bar(x=xvalues, y=trace3_value,name='Assignment3', marker={'color':'#eb8634'})
 
 
 #Add styling to app. Option to use external stylsheet
@@ -72,7 +74,7 @@ app.layout = html.Div(children=[
 #Row that displays different data to user
             html.Div([
                             html.Div(
-                                [html.H6(id="countdownText"), html.P("Time till Next Dateline: 13 Days")],
+                                [html.H6(id="countdownText"), html.P("Time Till Next Dateline: 13 Days")],
                                 id="countdown",
                                 className="mini_container",
                                 style={"padding": "20px"},
@@ -107,31 +109,30 @@ app.layout = html.Div(children=[
                     [
                         html.A(
                             html.Button("Recommended Learning Resources", id="learn-more-button"),
-                            href="https://www.linkedin.com/learning/me?trk=nav_neptune_learning&u=70295562",
-                        )
+                            href="https://www.linkedin.com",
+                        ),
                     ],
                     id="resourcebutton",
                     style={"margin-bottom": "25px", "float":"right"},
                 ),
     #create a dropdown that menu item
-            dcc.Dropdown(id='assignment-picker',
+            dcc.Dropdown(id='mark_picker',
         options=[
-            {'label': 'Assignment 1', 'value': 'Ass1'},
-            {'label': 'Select Assignment', 'value': 'Select'},
-            {'label': 'Assignment 2', 'value': 'Ass2'},
-            {'label': 'Assignment 3', 'value': 'Ass3'}
+            {'label': 'Your Score Per Assignment', 'value': 'your_score'},
+            {'label': 'Select Visualisation', 'value': 'Select'},
+            {'label': 'Average Class Score Per Assignment', 'value': 'class_score'}
         ],
         multi=True,
         value="Select"
     ),
-        dcc.Dropdown(id='progress-picker',
+        dcc.Dropdown(id='submission_picker',
         options=[
-            {'label': 'Highest Score', 'value': 'HS'},
-            {'label': 'View Progress', 'value': 'VP'},
-            {'label': 'DP Needed', 'value': 'DP'}
+            {'label': 'Your Submissions Per Assignment', 'value': 'YS'},
+            {'label': 'Submission Per Assignment Visualisation', 'value': 'SA'},
+            {'label': 'Average Class Submissions Per Assignment', 'value': 'CS'}
         ],
         multi=True,
-        value="VP"
+        value="SA"
     ),
 
 # Display plot using dcc graph_objs
