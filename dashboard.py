@@ -77,25 +77,37 @@ app.layout = html.Div(children=[
                                 [html.H6(id="countdownText"), html.P("Time Till Next Dateline: 13 Days")],
                                 id="countdown",
                                 className="mini_container",
-                                style={"padding": "20px"},
+                                style={"padding": "20px", 'color':'#F40009'},
                             ),
                                 html.Div(
                                     [html.H6(id="highestscoreText"), html.P("Your Highest Score: 80%")],
                                     id="highestscore",
                                     className="mini_container",
-                                    style={"padding": "20px"},
+                                    style={"padding": "20px", 'color':'#F40009'},
                             ),
                                 html.Div(
                                     [html.H6(id="averagescoreText"), html.P("Your Average Score: 78%")],
                                     id="averagescore",
                                     className="mini_container",
-                                    style={"padding": "20px"},
+                                    style={"padding": "20px", 'color':'#F40009'},
+                            ),
+                                html.Div(
+                                    [html.H6(id="classaveragescoreText"), html.P("Class Average Score: 72%")],
+                                    id="classaveragescore",
+                                    className="mini_container",
+                                    style={"padding": "20px", 'color':'#F40009'},
+                            ),
+                                html.Div(
+                                    [html.H6(id="rateText"), html.P("Rate of Assignment Submission Per Hour: 3")],
+                                    id="ratescore",
+                                    className="mini_container",
+                                    style={"padding": "20px", 'color':'#F40009'},
                             ),
                                 html.Div(
                                     [html.H6(id="dpneededText"), html.P("DP Needed: 67%")],
                                     id="dpneeded",
                                     className="mini_container",
-                                    style={"padding": "20px"},
+                                    style={"padding": "20px", 'color':'#F40009'},
                             ),
                              ],
                                  id="info-container",
@@ -125,15 +137,7 @@ app.layout = html.Div(children=[
         multi=True,
         value="Select"
     ),
-        dcc.Dropdown(id='submission_picker',
-        options=[
-            {'label': 'Your Submissions Per Assignment', 'value': 'YS'},
-            {'label': 'Submission Per Assignment Visualisation', 'value': 'SA'},
-            {'label': 'Average Class Submissions Per Assignment', 'value': 'CS'}
-        ],
-        multi=True,
-        value="SA"
-    ),
+
 
 # Display plot using dcc graph_objs
              dcc.Graph(id="plotfromdata",
@@ -141,6 +145,16 @@ app.layout = html.Div(children=[
                         'layout':go.Layout(title='MARKS VS ASSIGNMENTS SUBMITTED', xaxis={'title':'Assignments'},yaxis={'title':'Marks'})}
 
                         ),
+
+            dcc.Dropdown(id='submission_picker',
+            options=[
+                {'label': 'Your Submissions Per Assignment', 'value': 'YS'},
+                {'label': 'Submission Per Assignment Visualisation', 'value': 'SA'},
+                {'label': 'Average Class Submissions Per Assignment', 'value': 'CS'}
+            ],
+            multi=True,
+            value="SA"
+        ),
 
             dcc.Graph(id="plotfromdata-2",
                        figure = {'data':[trace1,trace2,trace3],
