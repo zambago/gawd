@@ -16,6 +16,15 @@ import pandas as pd
 #Initialise dash application
 app= dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
+# using dommon mark to provide additional resource to students
+markdown_text = '''
+### Assignment two is mearnt to test your Knowledge on writing functions.
+
+Python is an extreamely versatile language.
+Additional resources to help with this assignment can be accessed on [Linkedin Learning](http://linkedin.com/).
+
+'''
+
 #get data for app
 np.random.seed(42)
 random_x=np.random.randint(1,101,100)
@@ -27,9 +36,9 @@ yvalues = np.random.randint(1,101,10)
 
 #data for number of submissions per assignments
 
-trace1_value = np.random.randint(1,31,10)
+trace1_value = np.random.randint(1,20,10)
 trace2_value = np.random.randint(1,20,10)
-trace3_value = np.random.randint(1,21,10)
+trace3_value = np.random.randint(1,20,10)
 
 #Define Traces for second Graph
 trace1 = go.Bar(x=xvalues, y=trace1_value,name='Assignment1', marker={'color':'#eb34db'})
@@ -42,33 +51,31 @@ colors = {'background':'#a7cef2', 'text':'#7FDBFF'}
 
 #Use dash html components to diplay html on dash
 app.layout = html.Div(children=[
-             html.H1("Hello Kedumetse!", style={'textAlign':'left'
-                                                }),
+             html.H1("Hello Kedumetse!"),
+             dcc.Markdown(children=markdown_text, style={"border-style":'solid',"text-align":'center'}),
              html.Br(),
 
  # Div that creates a Navigation tab in dasbboard
             html.Div(
             [
-                html.H2("Below is an overview of your dashboard"),
+                html.H2("Below is an Summary of your assignment submissions"),
                 html.Br(),
                 dbc.Tab(
                         label="Overview",
                         style={"padding": "10px"},
                         ),
-                        dbc.Tab(
                             dbc.Card(
                                 dbc.CardBody(
                                     [
                                         html.P(
-                                            "View Your Common Error from submitted Assignments",
+                                            "Click Here to View Output from Submitted Assignments",
                                             className="card-text",
                                         ),
-                                        dbc.Button("Click here", color="success"),
+                                        dbc.Button("Click here", color="success",id="view_output"),
+                                        html.Div(id="output_text"),
                                     ]
                                 )
                             ),
-
-                        ),
                         ]),
 
 #Row that displays different data to user
@@ -103,6 +110,12 @@ app.layout = html.Div(children=[
                                     className="mini_container",
                                     style={"padding": "20px", 'color':'#F40009'},
                             ),
+                                    html.Div(
+                                        [html.H6(id="errorsText"), html.P("Common Errors: Type Error")],
+                                        id="commonerrors",
+                                        className="mini_container",
+                                        style={"padding": "20px", 'color':'#F40009'},
+                                ),
                                 html.Div(
                                     [html.H6(id="dpneededText"), html.P("DP Needed: 67%")],
                                     id="dpneeded",
@@ -116,17 +129,7 @@ app.layout = html.Div(children=[
 
                             ),
 
-# Div with link to more resources
-               html.Div(
-                    [
-                        html.A(
-                            html.Button("Recommended Learning Resources", id="learn-more-button"),
-                            href="https://www.linkedin.com",
-                        ),
-                    ],
-                    id="resourcebutton",
-                    style={"margin-bottom": "25px", "float":"right"},
-                ),
+
     #create a dropdown that menu item
             dcc.Dropdown(id='mark_picker',
         options=[
