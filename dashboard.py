@@ -134,11 +134,9 @@ app.layout = html.Div(children=[
             dcc.Dropdown(id='mark_picker',
         options=[
             {'label': 'Your Score Per Assignment', 'value': 'your_score'},
-            {'label': 'Select Visualisation', 'value': 'Select'},
             {'label': 'Average Class Score Per Assignment', 'value': 'class_score'}
         ],
-        multi=True,
-        value="Select"
+        value="your_score"
     ),
 
 
@@ -152,11 +150,9 @@ app.layout = html.Div(children=[
             dcc.Dropdown(id='submission_picker',
             options=[
                 {'label': 'Your Submissions Per Assignment', 'value': 'YS'},
-                {'label': 'Submission Per Assignment Visualisation', 'value': 'SA'},
                 {'label': 'Average Class Submissions Per Assignment', 'value': 'CS'}
             ],
-            multi=True,
-            value="SA"
+            value="YS"
         ),
 
             dcc.Graph(id="plotfromdata-2",
