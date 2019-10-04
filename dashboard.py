@@ -1,5 +1,5 @@
 """
-A simple learning analytics dashboard for programming assignment feedback.
+A simple learning analytics dashboard high fidelity prototype for programming assignment feedback.
 
 """
 
@@ -13,17 +13,10 @@ from dash.dependencies import Input, Output, State, ClientsideFunction
 import numpy as np
 import pandas as pd
 
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 #Initialise dash application
 app= dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-# using dommon mark to provide additional resource to students
-markdown_text = '''
-### Assignment two is mearnt to test your Knowledge on writing functions.
-
-Python is an extreamely versatile language.
-Additional resources to help with this assignment can be accessed on [Linkedin Learning](http://linkedin.com/).
-
-'''
 
 #get data for app
 np.random.seed(42)
@@ -54,17 +47,21 @@ app.layout = html.Div(children=[
              dcc.Input(
                     id="my_name",
                     type='text',
-                    value='Enter your name',
+                    value='Your Name',
                     style = {'display': 'inline-block', 'width': '30%', 'margin':'auto','font-size':'150%'}
                 ),
              html.Div(id="my_newname", style={"border-width": "10px",'width': '30%','font-size':'150%'}),
              html.Br(),
-             dcc.Markdown(children=markdown_text, style={"border-style":'solid',"text-align":'center'}),
-             html.Br(),
-
  # Div that creates tabs with a summary of student submissions
+             dcc.Tabs(id="tabs", value='tab-1', children=[
+                dcc.Tab(label='Overview', value='tab-1'),
+                dcc.Tab(label='Analytics', value='tab-2'),
+                ]),
+                html.Div(id='tabs-content'),
+
             html.Div(
                         [
+                html.Br(),
                 html.H2("Below is an Summary of your assignment submissions"),
                 html.Br(),
                     dbc.Row([
@@ -73,13 +70,12 @@ app.layout = html.Div(children=[
                                     dbc.CardBody(
                                         [
                                             html.P(
-                                                "Output from Submitted Assignments",
+                                                "Overall Performance: Good",
                                                 className="card-text",
                                             ),
-                                            dbc.CardLink("Click here", href="https://vula.uct.ac.za/portal"),
                                         ]
                                     ),
-                                    style={"width": "18rem", 'color':'#F40009'},
+                                    style={"width": "12rem", "margin":"10px"},
                                 ),
                                 ),
                         dbc.Col(
@@ -92,7 +88,7 @@ app.layout = html.Div(children=[
                                             ),
                                         ]
                                     ),
-                                    style={"width": "18rem"},
+                                    style={"width": "12rem"},
                                 ),
                                 ),
                         dbc.Col(
@@ -105,7 +101,7 @@ app.layout = html.Div(children=[
                                             ),
                                         ]
                                     ),
-                                    style={"width": "18rem"},
+                                    style={"width": "12rem"},
                                 ),
                                 ),
                         dbc.Col(
@@ -118,7 +114,7 @@ app.layout = html.Div(children=[
                                             ),
                                         ]
                                     ),
-                                    style={"width": "18rem"},
+                                    style={"width": "12rem"},
                                 ),
                                 ),
                             ]),
@@ -128,12 +124,12 @@ app.layout = html.Div(children=[
                                         dbc.CardBody(
                                             [
                                                 html.P(
-                                                    "Rate of Assignment Submission Per Hour: 3",
+                                                    "Rate of Assignment Submission: 3/hr",
                                                     className="card-text",
                                                 ),
                                             ]
                                         ),
-                                        style={"width": "18rem"},
+                                        style={"width": "12rem"},
                                     ),
                                     ),
                             dbc.Col(
@@ -146,7 +142,7 @@ app.layout = html.Div(children=[
                                                 ),
                                             ]
                                         ),
-                                        style={"width": "18rem"},
+                                        style={"width": "12rem"},
                                     ),
                                     ),
                             dbc.Col(
@@ -159,7 +155,7 @@ app.layout = html.Div(children=[
                                                 ),
                                             ]
                                         ),
-                                        style={"width": "18rem"},
+                                        style={"width": "12rem"},
                                     ),
                                     ),
                                 dbc.Col(
@@ -172,7 +168,7 @@ app.layout = html.Div(children=[
                                                     ),
                                                 ]
                                             ),
-                                            style={"width": "18rem"},
+                                            style={"width": "12rem"},
                                         ),
                                         ),
                                 ]),
@@ -217,7 +213,7 @@ app.layout = html.Div(children=[
 @app.callback(Output(component_id="my_newname" , component_property="children"),
                     [Input(component_id="my_name", component_property="value")])
 def update_name_output(input_value):
-    return "Welcome: {}".format(input_value)
+    return "Welcome to Your New Dashboard: {}".format(input_value)
 
 
 if __name__ == '__main__':
