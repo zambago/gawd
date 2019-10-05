@@ -1,6 +1,5 @@
 """
 A simple learning analytics dashboard high fidelity prototype for programming assignment feedback.
-
 """
 
 #Import python libraries
@@ -57,12 +56,45 @@ app.layout = html.Div(children=[
                 dcc.Tab(label='Overview', value='tab-1'),
                 dcc.Tab(label='Analytics', value='tab-2'),
                 ]),
-                html.Div(id='tabs-content'),
+                html.Div(id='tabs-content')],style={'margin':'120px'})
 
-            html.Div(
-                        [
+
+
+#Callbacks to update Dashboard
+
+#Callback to update output div for student name
+@app.callback(Output(component_id="my_newname" , component_property="children"),
+                    [Input(component_id="my_name", component_property="value")])
+def update_name_output(input_value):
+    return "Welcome to Your New Dashboard: {}".format(input_value)
+
+
+@app.callback(Output('tabs-content', 'children'),
+              [Input('tabs', 'value')])
+def render_content(tab):
+    if tab == "tab-2":
+        return html.Div([
+            html.Br(),
+            html.H3("NUMBER OF SUBMISSIONS PER ASSIGNMENT"),
+            html.Br(),
+                dcc.Dropdown(id='mark_picker',
+                    options=[
+                        {'label': 'Your Score Per Assignment', 'value': 'your_score'},
+                        {'label': 'Average Class Score Per Assignment', 'value': 'class_score'}
+                    ],
+                    value="your_score"
+                ),
+            html.Br(),
+            dcc.Graph(
+                      id='graph-2-tabs',
+                        figure={'data':[go.Bar(x=xvalues, y=yvalues)],
+                        'layout':go.Layout(title='MARKS VS ASSIGNMENTS SUBMITTED', xaxis={'title':'Assignments'},yaxis={'title':'Marks'})}
+                )
+            ])
+    elif tab == "tab-1":
+            return html.Div([
                 html.Br(),
-                html.H2("Below is an Summary of your assignment submissions"),
+                html.H3("Below is an Summary of your assignment submissions"),
                 html.Br(),
                     dbc.Row([
                         dbc.Col(
@@ -137,7 +169,7 @@ app.layout = html.Div(children=[
                                         dbc.CardBody(
                                             [
                                                 html.P(
-                                                    "Common Errors: Type Error",
+                                                    "Most Common Errors: Type Error",
                                                     className="card-text",
                                                 ),
                                             ]
@@ -150,7 +182,7 @@ app.layout = html.Div(children=[
                                         dbc.CardBody(
                                             [
                                                 html.P(
-                                                    "DP Needed: 67%",
+                                                    "DP Needed to Qualify: 67%",
                                                     className="card-text",
                                                 ),
                                             ]
@@ -172,48 +204,7 @@ app.layout = html.Div(children=[
                                         ),
                                         ),
                                 ]),
-                        ]),
-                        html.Br(),
-
-    #create a dropdown that menu item
-            dcc.Dropdown(id='mark_picker',
-        options=[
-            {'label': 'Your Score Per Assignment', 'value': 'your_score'},
-            {'label': 'Average Class Score Per Assignment', 'value': 'class_score'}
-        ],
-        value="your_score"
-    ),
-
-
-# Display plot using dcc graph_objs
-             dcc.Graph(id="plotfromdata",
-                        figure={'data':[go.Bar(x=xvalues, y=yvalues)],
-                        'layout':go.Layout(title='MARKS VS ASSIGNMENTS SUBMITTED', xaxis={'title':'Assignments'},yaxis={'title':'Marks'})}
-
-                        ),
-
-            dcc.Dropdown(id='submission_picker',
-            options=[
-                {'label': 'Your Submissions Per Assignment', 'value': 'YS'},
-                {'label': 'Average Class Submissions Per Assignment', 'value': 'CS'}
-            ],
-            value="YS"
-        ),
-
-            dcc.Graph(id="plotfromdata-2",
-                       figure = {'data':[trace1,trace2,trace3],
-                       'layout':go.Layout(title='NUMBER OF SUBMISSIONS PER ASSIGNMENT', xaxis={'title':'Assignments'},yaxis={'title':'No of Submissions'})}
-
-
-            )], style={'margin':'120px'})
-
-#Callbacks to update Dashboard
-
-#Callback to update output div for student name
-@app.callback(Output(component_id="my_newname" , component_property="children"),
-                    [Input(component_id="my_name", component_property="value")])
-def update_name_output(input_value):
-    return "Welcome to Your New Dashboard: {}".format(input_value)
+                        ])
 
 
 if __name__ == '__main__':
