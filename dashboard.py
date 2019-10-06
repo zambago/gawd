@@ -107,7 +107,7 @@ def render_content(tab):
                                             ),
                                         ]
                                     ),
-                                    style={"width": "12rem", "margin":"10px"},
+                                    style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
                                 ),
                                 ),
                         dbc.Col(
@@ -115,12 +115,12 @@ def render_content(tab):
                                     dbc.CardBody(
                                         [
                                             html.P(
-                                                "Next Due Date: 13 Days",
+                                                "Whats due next: Assignment 2",
                                                 className="card-text",
                                             ),
                                         ]
                                     ),
-                                    style={"width": "12rem"},
+                                    style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
                                 ),
                                 ),
                         dbc.Col(
@@ -128,12 +128,12 @@ def render_content(tab):
                                     dbc.CardBody(
                                         [
                                             html.P(
-                                                "Your Average Score: 78%",
+                                                "Your Average Score from x Assignments: 78%",
                                                 className="card-text",
                                             ),
                                         ]
                                     ),
-                                    style={"width": "12rem"},
+                                    style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
                                 ),
                                 ),
                         dbc.Col(
@@ -146,7 +146,7 @@ def render_content(tab):
                                             ),
                                         ]
                                     ),
-                                    style={"width": "12rem"},
+                                    style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
                                 ),
                                 ),
                             ]),
@@ -161,7 +161,7 @@ def render_content(tab):
                                                 ),
                                             ]
                                         ),
-                                        style={"width": "12rem"},
+                                        style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
                                     ),
                                     ),
                             dbc.Col(
@@ -174,7 +174,7 @@ def render_content(tab):
                                                 ),
                                             ]
                                         ),
-                                        style={"width": "12rem"},
+                                        style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
                                     ),
                                     ),
                             dbc.Col(
@@ -187,7 +187,7 @@ def render_content(tab):
                                                 ),
                                             ]
                                         ),
-                                        style={"width": "12rem"},
+                                        style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
                                     ),
                                     ),
                                 dbc.Col(
@@ -200,7 +200,7 @@ def render_content(tab):
                                                     ),
                                                 ]
                                             ),
-                                            style={"width": "12rem"},
+                                            style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
                                         ),
                                         ),
                                 ]),
