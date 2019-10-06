@@ -4,6 +4,7 @@ A simple learning analytics dashboard high fidelity prototype for programming as
 
 #Import python libraries
 import dash
+import time
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
@@ -56,6 +57,7 @@ app.layout = html.Div(children=[
                 dcc.Tab(label='Overview', value='tab-1'),
                 dcc.Tab(label='Analytics', value='tab-2'),
                 ]),
+                dcc.Loading(id="loading-1", children=[html.Div(id="loading-output-1")], type="default"),
                 html.Div(id='tabs-content')],style={'margin':'120px'})
 
 
@@ -68,6 +70,13 @@ app.layout = html.Div(children=[
 def update_name_output(input_value):
     return "Welcome to Your New Dashboard: {}".format(input_value)
 
+#Calback to start a spinner if components take too long to load when tabs are clicked
+@app.callback(Output("loading-output-1", "children"), [Input("tabs", "value")])
+def input_triggers_spinner(value):
+    time.sleep(1)
+    return value
+
+#Call back to update the tabs div when tabs are clicked
 
 @app.callback(Output('tabs-content', 'children'),
               [Input('tabs', 'value')])
