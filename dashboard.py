@@ -17,6 +17,7 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 #Initialise dash application
 app= dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
+app.config['suppress_callback_exceptions'] = True
 
 #get data for app
 np.random.seed(42)
@@ -55,10 +56,19 @@ app.layout = html.Div(children=[
  # Div that creates tabs with a summary of student submissions
              dcc.Tabs(id="tabs", value='tab-1', children=[
                 dcc.Tab(label='Overview', value='tab-1'),
-                dcc.Tab(label='Analytics', value='tab-2'),
+                dcc.Tab(label='Analytics', value='tab-2', children=[html.H3("Select Graph from the Dropdown Menu"),html.Div(
+                        dcc.Dropdown(id='mark_picker',
+                            options=[
+                                {'label':'Score Per Assignment', 'value': 'your_score'},
+                                {'label':'Average Submissions per Assignment', 'value': 'submission_number'}
+                            ],
+                            value="your_score"
+                        ),style={"margin":"30px"},),dcc.Graph(id='graph-content'),]),
                 ]),
                 dcc.Loading(id="loading-1", children=[html.Div(id="loading-output-1")], type="default"),
-                html.Div(id='tabs-content')],style={'margin':'120px'})
+                html.Div(id='tabs-content'),
+
+                ],style={'margin':'120px'})
 
 
 
@@ -84,15 +94,7 @@ def render_content(tab):
     if tab == "tab-2":
         return html.Div([
             html.Br(),
-            html.H3("NUMBER OF SUBMISSIONS PER ASSIGNMENT"),
-            html.Br(),
-                dcc.Dropdown(id='mark_picker',
-                    options=[
-                        {'label': 'Your Score Per Assignment', 'value': 'your_score'},
-                        {'label': 'Average Class Score Per Assignment', 'value': 'class_score'}
-                    ],
-                    value="your_score"
-                ),
+            html.H3("The Below Graph shows score for assignments submitted"),
             html.Br(),
             dcc.Graph(
                       id='graph-2-tabs',
@@ -214,6 +216,14 @@ def render_content(tab):
                                         ),
                                 ]),
                         ])
+#Callback to update graph on analytics page when dropdown menu is selected
+@app.callback(Output('graph-content', 'figure'),
+              [Input('mark_picker', 'value')])
+def render_graph(dropdown):
+    if dropdown == 'submission_number':
+        return html.H3("test")
+    elif dropdown == 'your_score':
+        return html.H3("No test")
 
 
 if __name__ == '__main__':
