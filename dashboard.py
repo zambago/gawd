@@ -68,7 +68,7 @@ app.layout = html.Div(children=[
                 dcc.Loading(id="loading-1", children=[html.Div(id="loading-output-1")], type="default"),
                 html.Div(id='tabs-content'),
 
-                ],style={'margin':'120px'})
+                ],style={'padding':'20',"margin":"130px"})
 
 
 
@@ -221,9 +221,13 @@ def render_content(tab):
               [Input('mark_picker', 'value')])
 def render_graph(dropdown):
     if dropdown == 'submission_number':
-        return html.H3("test")
+        return {'data':[{'x': [1, 2, 3], 'y': [2, 4, 3],'type': 'bar', 'name': 'SF'},
+                        {'x': [1, 2, 3], 'y': [5, 4, 3],'type': 'bar', 'name': u'Montréal'},
+                        ],'layout':{"title": {"text": "A Bar Chart"}}}
     elif dropdown == 'your_score':
-        return html.H3("No test")
+        return {'data':[{'x': [2, 4, 6], 'y': [4, 8, 12],'type': 'bar', 'name': 'SF'},
+                        {'x': [1, 2, 3], 'y': [5, 4, 3],'type': 'bar', 'name': u'Montréal'},
+                        ],'layout':{"title": {"text": "Another Bar Chart"}}}
 
 
 if __name__ == '__main__':
