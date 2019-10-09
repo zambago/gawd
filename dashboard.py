@@ -59,8 +59,8 @@ app.layout = html.Div(children=[
                 dcc.Tab(label='Analytics', value='tab-2', children=[html.H3("Select Graph from the Dropdown Menu"),html.Div(
                         dcc.Dropdown(id='mark_picker',
                             options=[
-                                {'label':'Score Per Assignment', 'value': 'your_score'},
-                                {'label':'Average Submissions per Assignment', 'value': 'submission_number'}
+                                {'label':'Score per Assignment', 'value': 'your_score'},
+                                {'label':'Number of Submissions Per Assignment', 'value': 'submission_number'}
                             ],
                             value="your_score"
                         ),style={"margin":"30px"},),dcc.Graph(id='graph-content'),]),
@@ -221,13 +221,19 @@ def render_content(tab):
               [Input('mark_picker', 'value')])
 def render_graph(dropdown):
     if dropdown == 'submission_number':
-        return {'data':[{'x': [1, 2, 3], 'y': [2, 4, 3],'type': 'bar', 'name': 'SF'},
-                        {'x': [1, 2, 3], 'y': [5, 4, 3],'type': 'bar', 'name': u'Montréal'},
-                        ],'layout':{"title": {"text": "A Bar Chart"}}}
+        return {'data':[{'x': xvalues, 'y': yvalues,'type': 'line', 'name': 'Performance'},
+                        ],'layout':{"title": {"text": "Your Performance Over Time"},
+                            "xaxis":{"title":"Assignment Number"},
+                            "yaxis":{"title":"Average Score"}
+
+                        }}
     elif dropdown == 'your_score':
-        return {'data':[{'x': [2, 4, 6], 'y': [4, 8, 12],'type': 'bar', 'name': 'SF'},
-                        {'x': [1, 2, 3], 'y': [5, 4, 3],'type': 'bar', 'name': u'Montréal'},
-                        ],'layout':{"title": {"text": "Another Bar Chart"}}}
+        return {'data':[{'x': xvalues, 'y': yvalues,'type': 'bar', 'name': 'Your Score'},
+                        {'x': xvalues, 'y': yvalues,'type': 'bar', 'name': 'Average Class Score'},
+                        ],'layout':{"title": {"text": "Your Score Per Assignment vs Average Class Score"},
+                                        "xaxis":{"title":"Assignment Number"},
+                                        "yaxis":{"title":"Average Score"}
+                                        } }
 
 
 if __name__ == '__main__':
