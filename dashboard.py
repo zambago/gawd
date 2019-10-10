@@ -55,7 +55,122 @@ app.layout = html.Div(children=[
              html.Br(),
  # Div that creates tabs with a summary of student submissions
              dcc.Tabs(id="tabs", value='tab-1', children=[
-                dcc.Tab(label='Overview', value='tab-1'),
+                dcc.Tab(label='Overview', value='tab-1',
+                        children=[html.Div([
+                                        html.Br(),
+                                        html.H3("Below is an Summary of your assignment submissions"),
+                                        html.Br(),
+                                            dbc.Row([
+                                                dbc.Col(
+                                                dbc.Card(
+                                                            dbc.CardBody(
+                                                                [
+                                                                    html.P(
+                                                                        "Overall Performance: Good",
+                                                                        className="card-text",
+                                                                    ),
+                                                                ]
+                                                            ),
+                                                            style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
+                                                        ),
+                                                        ),
+                                                dbc.Col(
+                                                dbc.Card(
+                                                            dbc.CardBody(
+                                                                [
+                                                                    html.P(
+                                                                        "Whats due next: Assignment 2",
+                                                                        className="card-text",
+                                                                    ),
+                                                                ]
+                                                            ),
+                                                            style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
+                                                        ),
+                                                        ),
+                                                dbc.Col(
+                                                dbc.Card(
+                                                            dbc.CardBody(
+                                                                [
+                                                                    html.P(
+                                                                        "Your Average Score from x Assignments: 78%",
+                                                                        className="card-text",
+                                                                    ),
+                                                                ]
+                                                            ),
+                                                            style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
+                                                        ),
+                                                        ),
+                                                dbc.Col(
+                                                dbc.Card(
+                                                            dbc.CardBody(
+                                                                [
+                                                                    html.P(
+                                                                        "Class Average Score: 72%",
+                                                                        className="card-text",
+                                                                    ),
+                                                                ]
+                                                            ),
+                                                            style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
+                                                        ),
+                                                        ),
+                                                    ]),
+                                                dbc.Row([
+                                                    dbc.Col(
+                                                    dbc.Card(
+                                                                dbc.CardBody(
+                                                                    [
+                                                                        html.P(
+                                                                            "Rate of Assignment Submission: 3/hr",
+                                                                            className="card-text",
+                                                                        ),
+                                                                    ]
+                                                                ),
+                                                                style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
+                                                            ),
+                                                            ),
+                                                    dbc.Col(
+                                                    dbc.Card(
+                                                                dbc.CardBody(
+                                                                    [
+                                                                        html.P(
+                                                                            "Most Common Errors: Type Error",
+                                                                            className="card-text",
+                                                                        ),
+                                                                    ]
+                                                                ),
+                                                                style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
+                                                            ),
+                                                            ),
+                                                    dbc.Col(
+                                                    dbc.Card(
+                                                                dbc.CardBody(
+                                                                    [
+                                                                        html.P(
+                                                                            "DP Needed to Qualify: 67%",
+                                                                            className="card-text",
+                                                                        ),
+                                                                    ]
+                                                                ),
+                                                                style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
+                                                            ),
+                                                            ),
+                                                        dbc.Col(
+                                                        dbc.Card(
+                                                                    dbc.CardBody(
+                                                                        [
+                                                                            html.P(
+                                                                                "Your Highest Score: 80%",
+                                                                                className="card-text",
+                                                                            ),
+                                                                        ]
+                                                                    ),
+                                                                    style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
+                                                                ),
+                                                                ),
+                                                ]),
+
+                                            ]),
+                                            ]),
                 dcc.Tab(label='Analytics', value='tab-2', children=[html.H3("Select Graph from the Dropdown Menu"),html.Div(
                         dcc.Dropdown(id='mark_picker',
                             options=[
@@ -92,130 +207,10 @@ def input_triggers_spinner(value):
               [Input('tabs', 'value')])
 def render_content(tab):
     if tab == "tab-2":
-        return html.Div([
-            html.Br(),
-            html.H3("The Below Graph shows score for assignments submitted"),
-            html.Br(),
-            dcc.Graph(
-                      id='graph-2-tabs',
-                        figure={'data':[go.Bar(x=xvalues, y=yvalues)],
-                        'layout':go.Layout(title='MARKS VS ASSIGNMENTS SUBMITTED', xaxis={'title':'Assignments'},yaxis={'title':'Marks'})}
-                )
-            ])
+        return html.H3("test")
     elif tab == "tab-1":
-            return html.Div([
-                html.Br(),
-                html.H3("Below is an Summary of your assignment submissions"),
-                html.Br(),
-                    dbc.Row([
-                        dbc.Col(
-                        dbc.Card(
-                                    dbc.CardBody(
-                                        [
-                                            html.P(
-                                                "Overall Performance: Good",
-                                                className="card-text",
-                                            ),
-                                        ]
-                                    ),
-                                    style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
-                                ),
-                                ),
-                        dbc.Col(
-                        dbc.Card(
-                                    dbc.CardBody(
-                                        [
-                                            html.P(
-                                                "Whats due next: Assignment 2",
-                                                className="card-text",
-                                            ),
-                                        ]
-                                    ),
-                                    style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
-                                ),
-                                ),
-                        dbc.Col(
-                        dbc.Card(
-                                    dbc.CardBody(
-                                        [
-                                            html.P(
-                                                "Your Average Score from x Assignments: 78%",
-                                                className="card-text",
-                                            ),
-                                        ]
-                                    ),
-                                    style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
-                                ),
-                                ),
-                        dbc.Col(
-                        dbc.Card(
-                                    dbc.CardBody(
-                                        [
-                                            html.P(
-                                                "Class Average Score: 72%",
-                                                className="card-text",
-                                            ),
-                                        ]
-                                    ),
-                                    style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
-                                ),
-                                ),
-                            ]),
-                        dbc.Row([
-                            dbc.Col(
-                            dbc.Card(
-                                        dbc.CardBody(
-                                            [
-                                                html.P(
-                                                    "Rate of Assignment Submission: 3/hr",
-                                                    className="card-text",
-                                                ),
-                                            ]
-                                        ),
-                                        style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
-                                    ),
-                                    ),
-                            dbc.Col(
-                            dbc.Card(
-                                        dbc.CardBody(
-                                            [
-                                                html.P(
-                                                    "Most Common Errors: Type Error",
-                                                    className="card-text",
-                                                ),
-                                            ]
-                                        ),
-                                        style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
-                                    ),
-                                    ),
-                            dbc.Col(
-                            dbc.Card(
-                                        dbc.CardBody(
-                                            [
-                                                html.P(
-                                                    "DP Needed to Qualify: 67%",
-                                                    className="card-text",
-                                                ),
-                                            ]
-                                        ),
-                                        style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
-                                    ),
-                                    ),
-                                dbc.Col(
-                                dbc.Card(
-                                            dbc.CardBody(
-                                                [
-                                                    html.P(
-                                                        "Your Highest Score: 80%",
-                                                        className="card-text",
-                                                    ),
-                                                ]
-                                            ),
-                                            style={"width": "200px", "margin":"2em auto", "border-radius": "1em", "padding":"10px"},
-                                        ),
-                                        ),
-                                ]),
-                        ])
+            return html.H3('test2')
+
 #Callback to update graph on analytics page when dropdown menu is selected
 @app.callback(Output('graph-content', 'figure'),
               [Input('mark_picker', 'value')])
