@@ -48,7 +48,7 @@ app.layout = html.Div(children=[
              dcc.Input(
                     id="my_name",
                     type='text',
-                    value='Your Name',
+                    value='Enter Your Name',
                     style = {'display': 'inline-block', 'width': '30%', 'margin':'auto','font-size':'150%'}
                 ),
              html.Div(id="my_newname", style={"border-width": "10px",'width': '30%','font-size':'150%'}),
@@ -171,7 +171,9 @@ app.layout = html.Div(children=[
 
                                             ]),
                                             ]),
-                dcc.Tab(label='Analytics', value='tab-2', children=[html.H3("Select Graph from the Dropdown Menu"),html.Div(
+                dcc.Tab(label='Analytics', value='tab-2', children=[html.H3("Select Graph from the Dropdown Menu"),
+                dcc.Loading(id="loading-1", children=[html.Div(id="loading-output-1")], type="default"),
+                html.Div(
                         dcc.Dropdown(id='mark_picker',
                             options=[
                                 {'label':'Score per Assignment', 'value': 'your_score'},
@@ -180,9 +182,6 @@ app.layout = html.Div(children=[
                             value="your_score"
                         ),style={"margin":"30px"},),dcc.Graph(id='graph-content'),]),
                 ]),
-                dcc.Loading(id="loading-1", children=[html.Div(id="loading-output-1")], type="default"),
-                html.Div(id='tabs-content'),
-
                 ],style={'padding':'20',"margin":"130px"})
 
 
@@ -201,15 +200,7 @@ def input_triggers_spinner(value):
     time.sleep(1)
     return value
 
-#Call back to update the tabs div when tabs are clicked
 
-@app.callback(Output('tabs-content', 'children'),
-              [Input('tabs', 'value')])
-def render_content(tab):
-    if tab == "tab-2":
-        return html.H3("test")
-    elif tab == "tab-1":
-            return html.H3('test2')
 
 #Callback to update graph on analytics page when dropdown menu is selected
 @app.callback(Output('graph-content', 'figure'),
