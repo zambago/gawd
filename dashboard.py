@@ -92,7 +92,7 @@ app.layout = html.Div(children=[
                                                             dbc.CardBody(
                                                                 [
                                                                     html.P(
-                                                                        "Your Average Score from x Assignments: 78%",
+                                                                        "Your Average Score from 10 Assignments: 78%",
                                                                         className="card-text",
                                                                     ),
                                                                 ]
